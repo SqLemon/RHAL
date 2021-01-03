@@ -7,6 +7,11 @@
 
 /*!-----------INCLUDES PRIVADOS-----------------------------------------------------------------------------*/
 #include <DR_h/Hardware/DR_Timer1.h>
+#include <System.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /*!-----------DEFINES Y MACROS PRIVADOS---------------------------------------------------------------------*/
 #define TIM1_BASE             (APB2_PERIPH_BASE + 0x00002C00UL)
@@ -139,3 +144,6 @@ void TIM1_preloadEn(uint8_t chn){
 
 }
 
+#ifdef __cplusplus
+}
+#endif
