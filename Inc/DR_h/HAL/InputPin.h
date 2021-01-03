@@ -10,6 +10,7 @@
 
 #include <System.h>
 #include "Pin.h"
+#include "OutputPin.h"
 
 class InputPin : Pin {
 
@@ -17,6 +18,8 @@ public:
 	enum Mode {PULLUP, PULLDOWN, FLOATING, ANALOG};
 	InputPin(Port port, uint8_t pin, Mode mode);
 	inline bool read();
+	inline bool operator()();
+//	OutputPin toOutputPin(OutputPin::Mode mode);
 };
 
 #endif /* DR_H_PERIPHERALS_INPUTPIN_H_ */
