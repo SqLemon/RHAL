@@ -9,6 +9,10 @@
 /*!-----------INCLUDES PRIVADOS-----------------------------------------------------------------------------*/
 #include <DR_h/Hardware/DR_PLL.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /*!-----------DEFINES Y MACROS PRIVADOS---------------------------------------------------------------------*/
 #define RCC_BASE             (AHB_PERIPH_BASE + 0x00001000UL)
 #define RCC                	 ((RCC_t *)RCC_BASE)
@@ -117,4 +121,7 @@ void PCLK_setEnable(uint8_t reg, uint8_t bit, uint8_t en){
 		RCC->APB1_EN &= ~(1 << bit);
 }
 
+#ifdef __cplusplus
+}
+#endif
 

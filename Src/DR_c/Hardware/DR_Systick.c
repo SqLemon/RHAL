@@ -8,6 +8,11 @@
 
 /*!-----------INCLUDES PRIVADOS-----------------------------------------------------------------------------*/
 #include <DR_h/Hardware/DR_Systick.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /*!-----------DEFINES Y MACROS PRIVADOS---------------------------------------------------------------------*/
 #define SYSTICK_BASE 	(0xE000E010UL)
 #define SYSTICK		((STK_t *) SYSTICK_BASE)
@@ -52,3 +57,7 @@ void Systick_init(void){
 void SysTick_Handler(void){
 	main_flags.Systick_ms = 1;	//pongo flag en 1 para avisar que pasó 1ms
 }
+
+#ifdef __cplusplus
+}
+#endif

@@ -8,6 +8,10 @@
 /*!-----------INCLUDES PRIVADOS-----------------------------------------------------------------------------*/
 #include <DR_h/Hardware/DR_GPIO.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /*!-----------DEFINES Y MACROS PRIVADOS---------------------------------------------------------------------*/
 #define GPIO_BASE           (APB2_PERIPH_BASE + 0x00000800UL)	//Address del GPIO
 #define GPIO				((GPIO_t *)GPIO_BASE)
@@ -208,3 +212,7 @@ uint8_t GPIO_getPin(uint8_t port, uint8_t pin){
 uint8_t GPIO_getStatus(uint8_t port, uint8_t pin){
 	return ((GPIO[port].ODR >> pin) & 0x01);
 }
+
+#ifdef __cplusplus
+}
+#endif

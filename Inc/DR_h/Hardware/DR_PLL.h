@@ -10,6 +10,11 @@
 
 /*!-----------INCLUDES PUBLICOS-----------------------------------------------------------------------------*/
 #include <System.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /*!-----------DEFINES Y MACROS PUBLCIAS---------------------------------------------------------------------*/
 enum{PCLK1, PCLK};
 
@@ -21,5 +26,9 @@ enum{PCLK1, PCLK};
 /*!-----------FUNCIONES-------------------------------------------------------------------------------------*/
 void CLK_init();
 void PCLK_setEnable(uint8_t reg, uint8_t bit, uint8_t en);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* DR_H_DR_PLL_H_ */

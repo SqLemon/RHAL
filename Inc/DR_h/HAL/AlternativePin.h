@@ -14,7 +14,7 @@
 class AlternativePin : Pin {
 
 public:
-	enum Mode {PUSHPULL, OPENDRAIN};
+	enum Mode {PUSH_PULL, OPEN_DRAIN};
 	AlternativePin(Port port, uint8_t pin, Mode mode);
 
 };
