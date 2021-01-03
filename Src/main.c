@@ -20,8 +20,16 @@ int main(void)
 	CLK_init();
 	Systick_init();
 
+	main_flags.Systick_ms = 0;
+
 	while(1){
-		//TODO: everything
+		if(main_flags.Systick_ms){
+			//huboo una iterrupción de 1ms
+			main_flags.Systick_ms = 0;
+
+			//TODO: everything
+		}
+
 	}
 
 }

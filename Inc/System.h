@@ -8,6 +8,7 @@
 #ifndef SYSTEM_H_
 #define SYSTEM_H_
 
+/******  types definitions  ***********************************************************************/
 typedef	unsigned int		uint32_t;
 typedef	int					int32_t;
 typedef	short unsigned int	uint16_t;
@@ -21,12 +22,25 @@ typedef	char				int8_t;
 #define 	__RW            volatile 		//< lectura / escritura
 
 
+/******  base adresses definitions ****************************************************************/
 #define PERIPH_BASE           0x40000000UL /*!< Peripheral base address in the alias region */
 #define APB1_PERIPH_BASE       PERIPH_BASE
 #define APB2_PERIPH_BASE       (PERIPH_BASE + 0x00010000UL)
 #define AHB_PERIPH_BASE        (PERIPH_BASE + 0x00020000UL)
 
 
+/******  flags definitions * ***********************************************************************/
+//defino mapa de bits para flags globales
+typedef struct{
+	uint8_t Systick_ms: 1;
+}Flags_t;
+
+volatile Flags_t main_flags;//variable global para flags
+
+
+
+
+/******  Exceptions Numbers ***********************************************************************/
 typedef enum
 {
 /******  Cortex-M3 Processor Exceptions Numbers ***************************************************/
