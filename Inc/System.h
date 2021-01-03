@@ -35,14 +35,13 @@ typedef struct{
 	uint8_t Systick_ms: 1;
 }Flags_t;
 
-volatile Flags_t main_flags;//variable global para flags
+extern volatile Flags_t main_flags;//variable global para flags
 
 
 
 
 /******  Exceptions Numbers ***********************************************************************/
-typedef enum
-{
+typedef enum{
 /******  Cortex-M3 Processor Exceptions Numbers ***************************************************/
   NonMaskableInt_IRQn         = -14,    /*!< 2 Non Maskable Interrupt                             */
   HardFault_IRQn              = -13,    /*!< 3 Cortex-M3 Hard Fault Interrupt                     */

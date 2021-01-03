@@ -5,7 +5,7 @@
  *      Author: ianicknoejovich
  */
 
-#include <DR_h/Peripherals/OutputPin.h>
+#include <DR_h/HAL/OutputPin.h>
 #include <DR_h/Hardware/DR_GPIO.h>
 
 OutputPin::OutputPin(Port port, uint8_t pin, Mode mode) : Pin(port, pin) {

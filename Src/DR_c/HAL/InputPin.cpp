@@ -5,7 +5,7 @@
  *      Author: ianicknoejovich
  */
 
-#include <DR_h/Peripherals/InputPin.h>
+#include <DR_h/HAL/InputPin.h>
 #include <DR_h/Hardware/DR_GPIO.h>
 
 InputPin::InputPin(Port port, uint8_t pin, Mode mode) : Pin(port, pin) {
