@@ -14,6 +14,7 @@
 #include <DR_h/Hardware/DR_PLL.h>
 #include <DR_h/Hardware/DR_Systick.h>
 
+volatile Flags_t main_flags;//variable global para flags
 
 int main(void)
 {

@@ -16,14 +16,14 @@
 extern "C" {
 #endif
 
-enum {PORTA, PORTB, PORTC, PORTD, PORTE };
+enum ports_en{PORTA, PORTB, PORTC, PORTD, PORTE };
 
-enum {INPUT, OUTPUT};
-enum {HIGH, LOW};
+enum dir_en{INPUT, OUTPUT};
+enum state_en{HIGH, LOW};
 
-enum {INPUT_PULLUP, INPUT_PULLDOWN, INPUT_FLOATING, INPUT_ANALOG};
-enum {OUTPUT_PUSHPULL, OUTPUT_OPENDRAIN};
-enum {ALTERNATE_PUSHPULL, ALTERNATE_OPENDRAIN};
+enum in_mode_en{INPUT_PULLUP, INPUT_PULLDOWN, INPUT_FLOATING, INPUT_ANALOG};
+enum out_mode_en{OUTPUT_PUSHPULL, OUTPUT_OPENDRAIN};
+enum alt_mode_en{ALTERNATE_PUSHPULL, ALTERNATE_OPENDRAIN};
 
 
 /*!-----------TIPOS DE DATOS PUBLCIAS-----------------------------------------------------------------------*/
@@ -33,11 +33,12 @@ enum {ALTERNATE_PUSHPULL, ALTERNATE_OPENDRAIN};
 
 /*!-----------FUNCIONES-------------------------------------------------------------------------------------*/
 void GPIO_setDir(uint8_t port, uint8_t pin, uint8_t mode);
-void GPIO_setPin(uint8_t port, uint8_t pin, uint8_t val);
-uint8_t GPIO_getPin(uint8_t port, uint8_t pin);
 void GPIO_setInputMode(uint8_t port, uint8_t pin, uint8_t mode);
 void GPIO_setOutputMode(uint8_t port, uint8_t pin, uint8_t mode);
 void GPIO_setAltMode(uint8_t port, uint8_t pin, uint8_t mode);
+void GPIO_setPin(uint8_t port, uint8_t pin, uint8_t val);
+uint8_t GPIO_getPin(uint8_t port, uint8_t pin);
+uint8_t GPIO_getStatus(uint8_t port, uint8_t pin);
 
 #ifdef __cplusplus
 }

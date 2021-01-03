@@ -5,7 +5,7 @@
  *      Author: ianicknoejovich
  */
 
-#include <DR_h/Peripherals/Pin.h>
+#include <DR_h/HAL/Pin.h>
 #include <DR_h/Hardware/DR_GPIO.h>
 
 Pin::Pin(Port port, uint8_t pin) {
