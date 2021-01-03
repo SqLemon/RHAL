@@ -5,7 +5,7 @@
  *      Author: ianicknoejovich
  */
 
-#include <DR_h/Peripherals/AlternativePin.h>
+#include <DR_h/HAL/AlternativePin.h>
 #include <DR_h/Hardware/DR_GPIO.h>
 
 AlternativePin::AlternativePin(Port port, uint8_t pin, Mode mode) : Pin(port, pin) {

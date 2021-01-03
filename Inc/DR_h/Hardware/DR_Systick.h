@@ -8,6 +8,10 @@
 #ifndef DR_H_DR_SYSTICK_H_
 #define DR_H_DR_SYSTICK_H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /*!-----------INCLUDES PUBLICOS-----------------------------------------------------------------------------*/
 #include <System.h>
 /*!-----------DEFINES Y MACROS PUBLCIAS---------------------------------------------------------------------*/
@@ -20,5 +24,9 @@
 /*!-----------FUNCIONES-------------------------------------------------------------------------------------*/
 void Systick_init(void);
 extern void SysTick_Handler(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* DR_H_DR_SYSTICK_H_ */
