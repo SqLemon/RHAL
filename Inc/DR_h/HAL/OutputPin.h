@@ -5,8 +5,8 @@
  *      Author: ianicknoejovich
  */
 
-#ifndef DR_H_PERIPHERALS_OUTPUTPIN_H_
-#define DR_H_PERIPHERALS_OUTPUTPIN_H_
+#ifndef DR_H_HAL_OUTPUTPIN_H_
+#define DR_H_HAL_OUTPUTPIN_H_
 
 #include <System.h>
 #include "Pin.h"
@@ -23,4 +23,4 @@ public:
 
 };
 
-#endif /* DR_H_PERIPHERALS_OUTPUTPIN_H_ */
+#endif /* DR_H_HAL_OUTPUTPIN_H_ */

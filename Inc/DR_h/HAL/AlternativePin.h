@@ -5,8 +5,8 @@
  *      Author: ianicknoejovich
  */
 
-#ifndef DR_H_PERIPHERALS_ALTERNATIVEPIN_H_
-#define DR_H_PERIPHERALS_ALTERNATIVEPIN_H_
+#ifndef DR_H_HAL_ALTERNATIVEPIN_H_
+#define DR_H_HAL_ALTERNATIVEPIN_H_
 
 #include <System.h>
 #include "Pin.h"

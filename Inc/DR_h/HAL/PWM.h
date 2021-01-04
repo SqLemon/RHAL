@@ -6,7 +6,7 @@
  */
 
 #ifndef DR_H_PERIPHERALS_PWM_H_
-#define DR_H_PERIPHERALS_PWm_H_
+#define DR_H_PERIPHERALS_PWM_H_
 
 #include <System.h>
 

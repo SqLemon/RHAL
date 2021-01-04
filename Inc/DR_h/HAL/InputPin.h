@@ -5,8 +5,8 @@
  *      Author: ianicknoejovich
  */
 
-#ifndef DR_H_PERIPHERALS_INPUTPIN_H_
-#define DR_H_PERIPHERALS_INPUTPIN_H_
+#ifndef DR_H_HAL_INPUTPIN_H_
+#define DR_H_HAL_INPUTPIN_H_
 
 #include <System.h>
 #include "Pin.h"
@@ -22,4 +22,4 @@ public:
 //	OutputPin toOutputPin(OutputPin::Mode mode);
 };
 
-#endif /* DR_H_PERIPHERALS_INPUTPIN_H_ */
+#endif /* DR_H_HAL_INPUTPIN_H_ */
