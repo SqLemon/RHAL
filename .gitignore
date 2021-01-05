@@ -31,8 +31,5 @@
 *.out
 *.app
 
-Debug
-Release
-
 .DS_Store
 
