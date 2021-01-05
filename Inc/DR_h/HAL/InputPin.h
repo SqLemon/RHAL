@@ -16,7 +16,7 @@ class InputPin : Pin {
 
 public:
 	enum Mode {PULLUP, PULLDOWN, FLOATING, ANALOG};
-	InputPin(Port port, uint8_t pin, Mode mode);
+	InputPin(Port port, uint8_t pin, Mode mode = Mode::PULLDOWN);
 	inline bool read();
 	inline bool operator()();
 //	OutputPin toOutputPin(OutputPin::Mode mode);
