@@ -6,6 +6,8 @@
 *.lo
 *.o
 *.obj
+*.list
+*.su
 
 # Precompiled Headers
 *.gch
@@ -30,6 +32,11 @@
 *.exe
 *.out
 *.app
+*.bin
+*.elf
+*.map
+#others
+
 
 .DS_Store
 
