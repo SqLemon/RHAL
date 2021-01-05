@@ -70,8 +70,8 @@ all: main-build
 main-build: RHAL.elf secondary-outputs
 
 # Tool invocations
-RHAL.elf: $(OBJS) $(USER_OBJS) G:\RHAL\STM32F103C8TX_FLASH.ld
-	arm-none-eabi-g++ -o "RHAL.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"G:\RHAL\STM32F103C8TX_FLASH.ld" -Wl,-Map="RHAL.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
+RHAL.elf: $(OBJS) $(USER_OBJS) /Users/ianicknoejovich/Desktop/RHAL/STM32F103C8TX_FLASH.ld
+	arm-none-eabi-g++ -o "RHAL.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"/Users/ianicknoejovich/Desktop/RHAL/STM32F103C8TX_FLASH.ld" -Wl,-Map="RHAL.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -lstdc++ -lsupc++ -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

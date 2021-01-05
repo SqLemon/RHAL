@@ -106,7 +106,7 @@ typedef struct{
 }TIM_t;
 
 /*!-----------VARIABLES GLOBALES PRIVADAS-------------------------------------------------------------------*/
-volatile TIM_t *TIM_REG[4] = {
+TIM_t *const TIM_REG[] = {
 		((TIM_t *)TIM1_BASE),
 		((TIM_t *)TIM2_BASE),
 		((TIM_t *)TIM3_BASE),
