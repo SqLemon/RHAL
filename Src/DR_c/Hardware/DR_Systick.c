@@ -8,7 +8,7 @@
 
 /*!-----------INCLUDES PRIVADOS-----------------------------------------------------------------------------*/
 #include <DR_h/Hardware/DR_Systick.h>
-#include <DR_h/Hardware/DR_Software_Timer.h>
+
 
 #ifdef __cplusplus
 extern "C" {
