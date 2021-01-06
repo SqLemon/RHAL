@@ -25,18 +25,18 @@ enum PWM_mode{PWM_MODE1=6, PWM_MODE2};
 //extern variables
 
 /*!-----------FUNCIONES-------------------------------------------------------------------------------------*/
-inline void TIM_setPeriod(uint8_t timN, uint16_t val);
-inline void TIM_setCountMode(uint8_t timN, uint8_t mode);
-inline void TIM_autoReload_en(uint8_t timN);
-inline void TIM_counter_en(uint8_t timN);
-inline void TIM_setPLL(uint8_t timN, uint16_t val);
-inline void TIM_setClockDiv(uint8_t timN, uint8_t val);
-inline void TIM_setActiveHigh(uint8_t timN, uint8_t chnl);
-inline void TIM_output_en(uint8_t timN, uint8_t chnl);
-inline void TIM_setVal(uint8_t timN, uint8_t chnl, uint16_t val);
-inline void TIM_setSlaveMode(uint8_t timN, uint8_t val);
-inline void TIM_setInput_NInv(uint8_t timN, uint8_t chnl);
-inline uint16_t TIM_getCount(uint8_t timN, uint8_t chnl);
+extern inline void TIM_setPeriod(uint8_t timN, uint16_t val);
+extern inline void TIM_setCountMode(uint8_t timN, uint8_t mode);
+extern inline void TIM_autoReload_en(uint8_t timN);
+extern inline void TIM_counter_en(uint8_t timN);
+extern inline void TIM_setPLL(uint8_t timN, uint16_t val);
+extern inline void TIM_setClockDiv(uint8_t timN, uint8_t val);
+extern inline void TIM_setActiveHigh(uint8_t timN, uint8_t chnl);
+extern inline void TIM_output_en(uint8_t timN, uint8_t chnl);
+extern inline void TIM_setVal(uint8_t timN, uint8_t chnl, uint16_t val);
+extern inline void TIM_setSlaveMode(uint8_t timN, uint8_t val);
+extern inline void TIM_setInput_NInv(uint8_t timN, uint8_t chnl);
+extern inline uint16_t TIM_getCount(uint8_t timN, uint8_t chnl);
 
 void TIM1_setSel(uint8_t timN, uint8_t chn, uint8_t sel);
 void TIM1_setOutputMode(uint8_t timN, uint8_t chn, uint8_t mode);

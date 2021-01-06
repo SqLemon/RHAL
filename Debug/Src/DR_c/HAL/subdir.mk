@@ -9,6 +9,7 @@ CPP_SRCS += \
 ../Src/DR_c/HAL/OutputPin.cpp \
 ../Src/DR_c/HAL/PWM.cpp \
 ../Src/DR_c/HAL/Pin.cpp \
+../Src/DR_c/HAL/RHAL.cpp \
 ../Src/DR_c/HAL/SW_Timer.cpp 
 
 OBJS += \
@@ -17,6 +18,7 @@ OBJS += \
 ./Src/DR_c/HAL/OutputPin.o \
 ./Src/DR_c/HAL/PWM.o \
 ./Src/DR_c/HAL/Pin.o \
+./Src/DR_c/HAL/RHAL.o \
 ./Src/DR_c/HAL/SW_Timer.o 
 
 CPP_DEPS += \
@@ -25,6 +27,7 @@ CPP_DEPS += \
 ./Src/DR_c/HAL/OutputPin.d \
 ./Src/DR_c/HAL/PWM.d \
 ./Src/DR_c/HAL/Pin.d \
+./Src/DR_c/HAL/RHAL.d \
 ./Src/DR_c/HAL/SW_Timer.d 
 
 
@@ -39,6 +42,8 @@ Src/DR_c/HAL/PWM.o: ../Src/DR_c/HAL/PWM.cpp
 	arm-none-eabi-g++ "$<" -mcpu=cortex-m3 -std=gnu++14 -g3 -DSTM32 -DSTM32F1 -DSTM32F103C8Tx -DDEBUG -c -I../Inc -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/DR_c/HAL/PWM.d" -MT"$@" --specs=nano.specs -mfloat-abi=soft -mthumb -o "$@"
 Src/DR_c/HAL/Pin.o: ../Src/DR_c/HAL/Pin.cpp
 	arm-none-eabi-g++ "$<" -mcpu=cortex-m3 -std=gnu++14 -g3 -DSTM32 -DSTM32F1 -DSTM32F103C8Tx -DDEBUG -c -I../Inc -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/DR_c/HAL/Pin.d" -MT"$@" --specs=nano.specs -mfloat-abi=soft -mthumb -o "$@"
+Src/DR_c/HAL/RHAL.o: ../Src/DR_c/HAL/RHAL.cpp
+	arm-none-eabi-g++ "$<" -mcpu=cortex-m3 -std=gnu++14 -g3 -DSTM32 -DSTM32F1 -DSTM32F103C8Tx -DDEBUG -c -I../Inc -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/DR_c/HAL/RHAL.d" -MT"$@" --specs=nano.specs -mfloat-abi=soft -mthumb -o "$@"
 Src/DR_c/HAL/SW_Timer.o: ../Src/DR_c/HAL/SW_Timer.cpp
 	arm-none-eabi-g++ "$<" -mcpu=cortex-m3 -std=gnu++14 -g3 -DSTM32 -DSTM32F1 -DSTM32F103C8Tx -DDEBUG -c -I../Inc -O0 -ffunction-sections -fdata-sections -fno-exceptions -fno-rtti -fno-use-cxa-atexit -Wall -fstack-usage -MMD -MP -MF"Src/DR_c/HAL/SW_Timer.d" -MT"$@" --specs=nano.specs -mfloat-abi=soft -mthumb -o "$@"
 

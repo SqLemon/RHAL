@@ -167,7 +167,7 @@ inline void TIM_setInput_NInv(uint8_t timN, uint8_t chnl){
 }
 
 inline uint16_t TIM_getCount(uint8_t timN, uint8_t chnl){
-	TIM_REG[timN]->CCR[chnl];
+	return TIM_REG[timN]->CCR[chnl];
 }
 
 void TIM_setSel(uint8_t timN, uint8_t chn, uint8_t sel){

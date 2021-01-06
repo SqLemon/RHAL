@@ -8,6 +8,10 @@
 #ifndef SYSTEM_H_
 #define SYSTEM_H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /******  types definitions  ***********************************************************************/
 typedef	unsigned int		uint32_t;
 typedef	int					int32_t;
@@ -118,5 +122,10 @@ typedef enum{
 #define CAN1_RX0_IRQHandler           USB_LP_CAN1_RX0_IRQHandler
 #define USB_LP_IRQHandler             USB_LP_CAN1_RX0_IRQHandler
 //DMA channel interrupts are not redifined
+
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* SYSTEM_H_ */

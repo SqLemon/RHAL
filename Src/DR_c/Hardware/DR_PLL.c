@@ -17,13 +17,8 @@ extern "C" {
 #define RCC_BASE            (AHB_PERIPH_BASE + 0x00001000UL)
 #define RCC                	((RCC_t *)RCC_BASE)
 
-#define FLASH_BASE			(AHBPERIPH_BASE + 0x00002000UL)
+#define FLASH_BASE			(AHB_PERIPH_BASE + 0x00002000UL)
 #define FLASH_ACR			(*(uint32_t *) FLASH_BASE)
-
-#define AHB_SRAM_EN		2
-#define AHB_FLITF_EN	4
-#define AHB_FSMC_EN		8
-#define AHB_SDIO_EN		10
 
 /*!-----------TIPOS DE DATOS PRIVADOS-----------------------------------------------------------------------*/
 typedef struct{
@@ -81,60 +76,44 @@ typedef struct{
 /** @brief Iniciializa y configura la entrada de clock, el PLL y los clocks de los perifericos
  *
  */
-
-enum AHB_divFactor{AHB_DIV_NONE, AHB_DIV_2 = 8, AHB_DIV_4, AHB_DIV_8, AHB_DIV_16, AHB_DIV_64, AHB_DIV_128, AHB_DIV_256, AHB_DIV_512};
-enum APB_divFactor{APB_DIV_NONE, APB_DIV_2 = 4, APB_DIV_4, APB_DIV_8, APB_DIV_16};
-enum ADC_divFactor{ADC_DIV_2, ADC_DIV_4, ADC_DIV_6, ADC_DIV_8};
-enum USB_divFactor{USB_DIV_1_5, USB_DIV_NONE};
-enum FLASH_latencyWS{FLASH_LATENCY_24MHZ = 0, FLASH_LATENCY_48MHZ = 2, FLASH_LATENCY_72MHZ = 4};
-enum SYSCLK_src{SYSCLK_HSI, SYSCLK_HSE, SYSCLK_PLL};
-enum PLL_src{PLL_SRC_HSI,PLL_SRC_HSE};
-enum PLL_prediv{HSE_PREDIV_NONE, HSE_PREDIV_2};
-enum PLL_multFactor{
-	PLL_MULT_2,
-	PLL_MULT_3,
-	PLL_MULT_4,
-	PLL_MULT_5,
-	PLL_MULT_6,
-	PLL_MULT_7,
-	PLL_MULT_8,
-	PLL_MULT_9,
-	PLL_MULT_10,
-	PLL_MULT_11,
-	PLL_MULT_12,
-	PLL_MULT_13,
-	PLL_MULT_14,
-	PLL_MULT_15,
-};
-
-void CLK_init(){
-	//Initialize system by using external clock
-	RCC->CR.HSE_on = 1;			//"Turn On" external clock
-	while(!RCC->CR.HSE_ready);	//Wait until external clock is stable
-
-	//configure periferials preescalers
-	RCC->CFGR.AHB_presc = AHB_DIV_NONE; //72MHz
-	RCC->CFGR.APB1_presc = APB_DIV_2; //APB1. 36Mhz
-	RCC->CFGR.APB2_presc = APB_DIV_NONE; //APB2. 72MHz
-	RCC->CFGR.ADC_presc = ADC_DIV_6; //ADC. 12Mhz
-	RCC->CFGR.USB_presc = USB_DIV_1_5; //
-
-	FLASH_ACR |= FLASH_LATENCY_72MHZ; //set 2 wait states for speeds > to 48MHz.
-
-	//configure PLL
-	RCC->CFGR.PLL_mult = PLL_MULT_9; //PLL mult = x9
-	RCC->CFGR.PLL_src = PLL_SRC_HSE; //HSE as PLL source
-	RCC->CFGR.HSE_PLL_prediv = HSE_PREDIV_NONE; //PLL input = HSE. (si se pone '1' -> PLL input = HSE/2)
-
-	//enable PLL
-	RCC->CR.PLL_on = 1;
-	while(!RCC->CR.PLL_ready);
-
-
-	RCC->CFGR.SysClk_sw = SYSCLK_PLL; //PLL as system clk source
-	while(RCC->CFGR.SysClk_sw_stat != SYSCLK_PLL);
+extern inline void CLK_enableHSE(void){
+	RCC->CR.HSE_on = 1;
+	while(!RCC->CR.HSE_ready);
 }
 
+extern inline void CLK_setPrescaler(uint8_t AHB, uint8_t APB1, uint8_t APB2, uint8_t ADC, uint8_t USB){
+	RCC->CFGR.AHB_presc = AHB; //72MHz
+	RCC->CFGR.APB1_presc = APB1; //APB1. 36Mhz
+	RCC->CFGR.APB2_presc = APB2; //APB2. 72MHz
+	RCC->CFGR.ADC_presc = ADC; //ADC. 12Mhz
+	RCC->CFGR.USB_presc = USB; //
+}
+
+extern inline void CLK_FLASH_setLatency(uint8_t waitSatate){
+	FLASH_ACR |= waitSatate; //set 2 wait states for speeds > to 48MHz.
+}
+
+extern inline void CLK_setPLL_mult(uint8_t mult){
+	RCC->CFGR.PLL_mult = mult;
+}
+
+extern inline void CLK_setPLL_src(uint8_t src){
+	RCC->CFGR.PLL_src = src;
+}
+
+extern inline void CLK_PLL_HSEprediv(uint8_t e){
+	RCC->CFGR.HSE_PLL_prediv = e;
+}
+
+extern inline void CLK_enablePLL(){
+	RCC->CR.PLL_on = 1;
+	while(!RCC->CR.PLL_ready);
+}
+
+extern inline void CLK_setSystemCLK(uint8_t src){
+	RCC->CFGR.SysClk_sw = src; //PLL as system clk source
+	while(RCC->CFGR.SysClk_sw_stat != src);
+}
 
 
 /** @brief 	Permite hablitar los clocks de los perifericos

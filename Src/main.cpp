@@ -10,24 +10,13 @@
   #warning "FPU is not initialized, but the project is compiling for an FPU. Please initialize the FPU before use."
 #endif
 
-#include <DR_h/Hardware/DR_GPIO.h>
-#include <DR_h/Hardware/DR_PLL.h>
-#include <DR_h/Hardware/DR_Systick.h>
+#include <DR_h/HAL/RHAL.h>
 
-volatile Flags_t main_flags;//variable global para flags
-
-int main(void)
-{
-	CLK_init();
-	Systick_init();
-
-	main_flags.Systick_ms = 0;
+int main(void){
+	RHAL hal;
 
 	while(1){
-		if(main_flags.Systick_ms){
-			//huboo una iterrupción de 1ms
-			main_flags.Systick_ms = 0;
-
+		if(hal.one_ms_passed()){
 			//TODO: everything
 		}
 
