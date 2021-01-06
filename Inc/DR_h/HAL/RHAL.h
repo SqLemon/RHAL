@@ -9,8 +9,6 @@
 #define DR_H_HAL_RHAL_H_
 
 #include <System.h>
-#include <DR_h/Hardware/DR_PLL.h>
-#include <DR_h/Hardware/DR_Systick.h>
 
 class RHAL{
 public:
@@ -20,6 +18,7 @@ public:
 		main_flags.Systick_ms = 0;
 		return res;
 	};
+	void do_every_1ms(void (* func )(void));
 
 private:
 	void init_CLK();

@@ -23,7 +23,6 @@
 class SW_Timer{
 public:
 	SW_Timer(uint16_t t, void (* f_event )(void));
-	void run();
 	void setTime(uint16_t t);
 
 private:

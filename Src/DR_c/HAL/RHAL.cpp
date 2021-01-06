@@ -5,6 +5,9 @@
  *      Author: Damián
  */
 #include <DR_h/HAL/RHAL.h>
+#include <DR_h/Hardware/DR_PLL.h>
+#include <DR_h/Hardware/DR_Systick.h>
+#include <DR_h/Hardware/DR_Software_Timer.h>
 
 volatile Flags_t main_flags;//variable global para flags
 
@@ -31,4 +34,12 @@ void RHAL::init_CLK(){
 
 	CLK_enablePLL();
 	CLK_setSystemCLK(SYSCLK_PLL);
+}
+
+
+void RHAL::do_every_1ms(void (* func )(void)){
+	if(one_ms_passed()){
+		SW_Timer_Run();
+		func();
+	}
 }

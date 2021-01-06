@@ -12,13 +12,15 @@
 
 #include <DR_h/HAL/RHAL.h>
 
+void ms_func(void){
+	//TODO: everything
+}
+
 int main(void){
 	RHAL hal;
 
 	while(1){
-		if(hal.one_ms_passed()){
-			//TODO: everything
-		}
+		hal.do_every_1ms(&ms_func);
 
 	}
 

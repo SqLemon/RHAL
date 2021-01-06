@@ -57,7 +57,6 @@ void Systick_init(void){
  */
 void SysTick_Handler(void){
 	main_flags.Systick_ms = 1;	//pongo flag en 1 para avisar que pasó 1ms
-	SW_Timer_Discount();		//update Software Timer Values
 }
 
 #ifdef __cplusplus

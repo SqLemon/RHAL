@@ -99,14 +99,14 @@ enum PLL_multFactor{
 //extern variables
 
 /*!-----------FUNCIONES-------------------------------------------------------------------------------------*/
-inline void CLK_enableHSE(void);
-inline void CLK_setPrescaler(uint8_t AHB, uint8_t APB1, uint8_t APB2, uint8_t ADC, uint8_t USB);
-inline void CLK_FLASH_setLatency(uint8_t waitSatate);
-inline void CLK_setPLL_mult(uint8_t mult);
-inline void CLK_setPLL_src(uint8_t src);
-inline void CLK_PLL_HSEprediv(uint8_t e);
-inline void CLK_enablePLL();
-inline void CLK_setSystemCLK(uint8_t src);
+extern inline void CLK_enableHSE(void);
+extern inline void CLK_setPrescaler(uint8_t AHB, uint8_t APB1, uint8_t APB2, uint8_t ADC, uint8_t USB);
+extern inline void CLK_FLASH_setLatency(uint8_t waitSatate);
+extern inline void CLK_setPLL_mult(uint8_t mult);
+extern inline void CLK_setPLL_src(uint8_t src);
+extern inline void CLK_PLL_HSEprediv(uint8_t e);
+extern inline void CLK_enablePLL();
+extern inline void CLK_setSystemCLK(uint8_t src);
 
 void PCLK_setEnable(uint8_t reg, uint8_t bit, uint8_t en);
 

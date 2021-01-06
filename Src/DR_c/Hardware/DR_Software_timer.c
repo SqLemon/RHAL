@@ -149,12 +149,12 @@ void SW_Timer_Close ( void ){
 	@brief descuenta 1 a los valors restantes de tiempo de los contadores.
  	@author Damian Melamed
 */
-void SW_Timer_Discount ( void ){
+void SW_Timer_Run ( void ){
 	if(SW_TmrPlay){	//si algun software timer está siendo utilizado. Si no, no recorre el for loop}
 		for(uint8_t i = 0; i < N_TIMERS; i ++){
 			if((SW_TmrTime[i]) && (TmrPlayState(i))){
 				SW_TmrTime[i]--;
-				if(!SW_TmrTime[i])	setTmrFlag(i);
+				if(!SW_TmrTime[i])	SW_TmrFunc[i]();
 			}
 		}
 	}
@@ -166,15 +166,6 @@ void SW_Timer_Discount ( void ){
 	@Pparam [in] número de evento/contador.
  	@author Damian Melamed
 */
-void SW_Timer_Run(uint8_t event_n){
-	if(event_n < N_TIMERS){
-		if(TmrFlagState(event_n)){
-			clrTmrFlag(event_n);
-			SW_TmrFunc[event_n]();
-		}
-	}
-}
-
 
 
 

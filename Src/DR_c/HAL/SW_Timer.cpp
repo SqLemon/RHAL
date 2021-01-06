@@ -29,10 +29,6 @@ SW_Timer::SW_Timer(uint16_t t , void (* f_event )(void)){
 	}
 }
 
-void SW_Timer::run(void){
-	SW_Timer_Run(_event_N);
-}
-
 
 
 
