@@ -19,9 +19,9 @@ extern "C" {
 enum{PCLK1, PCLK2};
 enum PCLK2_bits{
 	AFIO_PCLK = 0,
-	IOPA_PCLK = 1,
-	IOPB_PCLK = 2,
-	IOPC_PCLK = 3,
+	GPIOA_PCLK = 1,
+	GPIOB_PCLK = 2,
+	GPIOC_PCLK = 3,
 
 	ADC1_PCLK = 9,
 	ADC2_PCLK = 10,
@@ -53,10 +53,6 @@ enum PCLK1_bits{
 	PWR_PCLK = 28,
 	DAC_PCLK = 29
 };
-
-
-
-
 
 
 enum APB_divFactor{APB_DIV_NONE, APB_DIV_2 = 4, APB_DIV_4, APB_DIV_8, APB_DIV_16};
@@ -99,16 +95,18 @@ enum PLL_multFactor{
 //extern variables
 
 /*!-----------FUNCIONES-------------------------------------------------------------------------------------*/
-extern inline void CLK_enableHSE(void);
-extern inline void CLK_setPrescaler(uint8_t AHB, uint8_t APB1, uint8_t APB2, uint8_t ADC, uint8_t USB);
-extern inline void CLK_FLASH_setLatency(uint8_t waitSatate);
-extern inline void CLK_setPLL_mult(uint8_t mult);
-extern inline void CLK_setPLL_src(uint8_t src);
-extern inline void CLK_PLL_HSEprediv(uint8_t e);
-extern inline void CLK_enablePLL();
-extern inline void CLK_setSystemCLK(uint8_t src);
+//Inline functions
+void CLK_enableHSE(void);
+void CLK_setPrescaler(uint8_t AHB, uint8_t APB1, uint8_t APB2, uint8_t ADC, uint8_t USB);
+void CLK_FLASH_setLatency(uint8_t waitSatate);
+void CLK_setPLL_mult(uint8_t mult);
+void CLK_setPLL_src(uint8_t src);
+void CLK_PLL_HSEprediv(uint8_t e);
+void CLK_enablePLL();
+void CLK_setSystemCLK(uint8_t src);
 
-void PCLK_setEnable(uint8_t reg, uint8_t bit, uint8_t en);
+void PCLK_Enable(uint8_t reg, uint8_t bit);
+void PCLK_Disable(uint8_t reg, uint8_t bit);
 
 #ifdef __cplusplus
 }

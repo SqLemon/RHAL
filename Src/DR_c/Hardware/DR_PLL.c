@@ -76,12 +76,12 @@ typedef struct{
 /** @brief Iniciializa y configura la entrada de clock, el PLL y los clocks de los perifericos
  *
  */
-inline void CLK_enableHSE(void){
+extern inline void CLK_enableHSE(void) {
 	RCC->CR.HSE_on = 1;
 	while(!RCC->CR.HSE_ready);
 }
 
-inline void CLK_setPrescaler(uint8_t AHB, uint8_t APB1, uint8_t APB2, uint8_t ADC, uint8_t USB){
+extern inline void CLK_setPrescaler(uint8_t AHB, uint8_t APB1, uint8_t APB2, uint8_t ADC, uint8_t USB){
 	RCC->CFGR.AHB_presc = AHB; //72MHz
 	RCC->CFGR.APB1_presc = APB1; //APB1. 36Mhz
 	RCC->CFGR.APB2_presc = APB2; //APB2. 72MHz
@@ -89,28 +89,28 @@ inline void CLK_setPrescaler(uint8_t AHB, uint8_t APB1, uint8_t APB2, uint8_t AD
 	RCC->CFGR.USB_presc = USB; //
 }
 
-inline void CLK_FLASH_setLatency(uint8_t waitSatate){
+extern inline void CLK_FLASH_setLatency(uint8_t waitSatate){
 	FLASH_ACR |= waitSatate; //set 2 wait states for speeds > to 48MHz.
 }
 
-inline void CLK_setPLL_mult(uint8_t mult){
+extern inline void CLK_setPLL_mult(uint8_t mult){
 	RCC->CFGR.PLL_mult = mult;
 }
 
-inline void CLK_setPLL_src(uint8_t src){
+extern inline void CLK_setPLL_src(uint8_t src){
 	RCC->CFGR.PLL_src = src;
 }
 
-inline void CLK_PLL_HSEprediv(uint8_t e){
+extern inline void CLK_PLL_HSEprediv(uint8_t e){
 	RCC->CFGR.HSE_PLL_prediv = e;
 }
 
-inline void CLK_enablePLL(){
+extern inline void CLK_enablePLL(){
 	RCC->CR.PLL_on = 1;
 	while(!RCC->CR.PLL_ready);
 }
 
-inline void CLK_setSystemCLK(uint8_t src){
+extern inline void CLK_setSystemCLK(uint8_t src){
 	RCC->CFGR.SysClk_sw = src; //PLL as system clk source
 	while(RCC->CFGR.SysClk_sw_stat != src);
 }
@@ -121,13 +121,11 @@ inline void CLK_setSystemCLK(uint8_t src){
  *  @param  bit a escribir
  *  @param 	habilitacion. 1 para habilitar, 0 para deshabilitar
  */
-void PCLK_setEnable(uint8_t reg, uint8_t bit, uint8_t en){
-	if(reg > PCLK2) return;
-	if(bit > 31) return;
-
-	if(en)
+extern inline void PCLK_Enable(uint8_t reg, uint8_t bit){
 		RCC->APB1_EN |= (1 << bit);
-	else
+}
+
+extern inline void PCLK_Disable(uint8_t reg, uint8_t bit){
 		RCC->APB1_EN &= ~(1 << bit);
 }
 

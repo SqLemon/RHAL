@@ -46,10 +46,11 @@ typedef struct{
  */
 void Systick_init(void){
 	SYSTICK->STK_LOAD = SYSTICK->STK_CALIB * 8;  //cargo el valor a copmarar para que genere una interrupcion cada 1ms
-	SYSTICK->STK_CTRL.CLK_SOURCE = 0;			 //Elijo que sume al contador con la frecuencia del procesador (72Mhz)
+	SYSTICK->STK_CTRL.CLK_SOURCE = 1;			 //Elijo que sume al contador con la frecuencia del procesador (72Mhz)
 	SYSTICK->STK_VAL = 0;						 //Pongo el contador en 0
 	SYSTICK->STK_CTRL.TICK_int = 1;				 //Habilito las interrupciones
 	SYSTICK->STK_CTRL.STK_enable = 1;			 //Habilito el Systick
+
 }
 
 /** @brief 	Systick handler

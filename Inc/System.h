@@ -27,10 +27,11 @@ typedef	char				int8_t;
 
 
 /******  base adresses definitions ****************************************************************/
-#define PERIPH_BASE           0x40000000UL /*!< Peripheral base address in the alias region */
-#define APB1_PERIPH_BASE       PERIPH_BASE
-#define APB2_PERIPH_BASE       (PERIPH_BASE + 0x00010000UL)
-#define AHB_PERIPH_BASE        (PERIPH_BASE + 0x00020000UL)
+#define NVIC_BASE				0xE000E100UL /*!< NVIC base address */
+#define PERIPH_BASE				0x40000000UL /*!< Peripheral base address in the alias region */
+#define APB1_PERIPH_BASE		PERIPH_BASE
+#define APB2_PERIPH_BASE		(PERIPH_BASE + 0x00010000UL)
+#define AHB_PERIPH_BASE			(PERIPH_BASE + 0x00020000UL)
 
 
 /******  flags definitions * ***********************************************************************/
@@ -40,7 +41,6 @@ typedef struct{
 }Flags_t;
 
 extern volatile Flags_t main_flags;//variable global para flags
-
 
 
 
@@ -101,7 +101,19 @@ typedef enum{
   EXTI15_10_IRQn              = 40,     /*!< External Line[15:10] Interrupts                      */
   RTC_Alarm_IRQn              = 41,     /*!< RTC Alarm through EXTI Line Interrupt                */
   USBWakeUp_IRQn              = 42,     /*!< USB Device WakeUp from suspend through EXTI Line Interrupt */
-} IRQn_Type;
+} IRQn_t;
+
+
+
+/******  NVIC struct & functions definitions * ***********************************************************************/
+typedef struct{
+	__RW uint32_t ISER[3];
+	__RW uint32_t ICER[3];
+}NVIC_t;
+
+#define	NVIC	((NVIC_t *) NVIC_BASE)
+#define NVIC_Enable(irq) 	NVIC->ISER[ irq / 32] |= (1 << (irq%32))
+#define NVIC_Disable(irq) 	NVIC->ICER[ irq / 32] |= (1 << (irq%32))
 
 
 /* Aliases for __IRQHandler */

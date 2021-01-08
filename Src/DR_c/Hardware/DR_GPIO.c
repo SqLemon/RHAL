@@ -17,6 +17,9 @@ extern "C" {
 #define GPIO_BASE           (APB2_PERIPH_BASE + 0x00000800UL)	//Address del GPIO
 #define GPIO				((GPIO_t *)GPIO_BASE)
 
+
+#define MODE_OFFSET	0x00
+#define CNF_OFFSET	0x00
 /*!-----------TIPOS DE DATOS PRIVADOS-----------------------------------------------------------------------*/
 typedef struct{
   __RW uint32_t CRL;	//port config - pines 0 a 7. Para configurar modo (input/output/pullup...)
@@ -63,20 +66,15 @@ typedef struct{
 void GPIO_setDir(uint8_t port, uint8_t pin, uint8_t mode){
 	//Pongo los de modo en 0 para luego poder escribir
 	//Quedan definidos como entradas
-	if(pin > 7)		GPIO[port].CRH &= ~(0x03 << (pin*4));
-	else			GPIO[port].CRL &= ~(0x03 << (pin*4));
+	if(pin > 7)		GPIO[port].CRH &= ~(0x03 << (pin*4 + MODE_OFFSET));
+	else			GPIO[port].CRL &= ~(0x03 << (pin*4 + MODE_OFFSET));
 
-	if(mode == OUTPUT){
-		if(pin > 7)	GPIO[port].CRH |= (0x01 << (pin*4));
-		else		GPIO[port].CRL |= (0x01 << (pin*4));
-		return;
-	}
-	else{
-		//ya está configurado como input. Dejo esto por si se necesita discriminar cuando el pin está configurado como entrada
+	if(mode != INPUT){
+		if(pin > 7)	GPIO[port].CRH |= (0x01 << (pin*4 + MODE_OFFSET));
+		else		GPIO[port].CRL |= (0x01 << (pin*4 + MODE_OFFSET));
 		return;
 	}
 }
-
 
 
 /** @brief 	poner un pin configurado como input en pullup, pul down, etc
@@ -89,23 +87,15 @@ void GPIO_setInputMode(uint8_t port, uint8_t pin, uint8_t mode){
 	//pongo en 0 los bits de crl.cnf. Está configurado como analog
 	GPIO[port].ODR	&= ~(1 << pin);
 
-	if(pin > 7)		GPIO[port].CRH &= ~(0x03 << ((pin*4)+2));
-	else			GPIO[port].CRL &= ~(0x03 << ((pin*4)+2));
-
-	//---choose values
-	uint8_t cnf_value, odr_value = 0;
-	switch(mode){
-		case INPUT_PULLUP:		cnf_value = 0b10;		odr_value = 1;	 	break;
-		case INPUT_PULLDOWN:	cnf_value = 0b10;		odr_value = 0;	 	break;
-		case INPUT_FLOATING:	cnf_value = 0b01;		odr_value = 0;	 	break;
-		case INPUT_ANALOG:		cnf_value = 0b00;		odr_value = 0;	 	break;
-	}
+	if(pin > 7)		GPIO[port].CRH &= ~(0x03 << ((pin*4) + CNF_OFFSET));
+	else			GPIO[port].CRL &= ~(0x03 << ((pin*4) + CNF_OFFSET));
 
 	//---set bits
-	if(pin > 7)		GPIO[port].CRH |= (cnf_value << ((pin*4)+2));
-	else			GPIO[port].CRL |= (cnf_value << ((pin*4)+2));
+	if(pin > 7)		GPIO[port].CRH |= (mode << ((pin*4) + CNF_OFFSET));
+	else			GPIO[port].CRL |= (mode << ((pin*4) + CNF_OFFSET));
 
-	if(odr_value)	GPIO[port].ODR |= (1 << pin);
+	if(mode == INPUT_PULLUP)	GPIO[port].ODR |= (1 << pin);
+	else 						GPIO[port].ODR &= ~(1 <<pin);
 }
 
 
@@ -118,44 +108,41 @@ void GPIO_setInputMode(uint8_t port, uint8_t pin, uint8_t mode){
 void GPIO_setOutputMode(uint8_t port, uint8_t pin, uint8_t mode){
 	//---reset bits to be set
 	//pongo en 0 los bits de crl.cnf. Está configurado como analog
-	if(pin > 7)		GPIO[port].CRH &= ~(0x03 << ((pin*4)+2));
-	else			GPIO[port].CRL &= ~(0x03 << ((pin*4)+2));
-
-	//---choose values
-	uint8_t cnf_value;
-	switch(mode){
-		case OUTPUT_PUSHPULL:	cnf_value = 0b00;		break;
-		case OUTPUT_OPENDRAIN:	cnf_value = 0b01; 		break;
-	}
+	if(pin > 7)		GPIO[port].CRH &= ~(0x03 << ((pin*4) + CNF_OFFSET));
+	else			GPIO[port].CRL &= ~(0x03 << ((pin*4) + CNF_OFFSET));
 
 	//---set bits
-	if(pin > 7)		GPIO[port].CRH |= (cnf_value << ((pin*4)+2));
-	else			GPIO[port].CRL |= (cnf_value << ((pin*4)+2));
+	if(pin > 7)		GPIO[port].CRH |= (mode << ((pin*4) + CNF_OFFSET));
+	else			GPIO[port].CRL |= (mode << ((pin*4) + CNF_OFFSET));
 }
 
+
+/** @brief 	configurar máxima velocidad de salida de un pin configurado como OUTPUT o como ALTERNATE
+ *  @param	Puerto del pin que se quiere congurar
+ *  @param 	Número de pin a configurar
+ *  @param	máxima velocidad. usar defines MAX_VEL_10MHZ, MAX_VEL_2MHZ, MAX_VEL_50MHZ
+ */
+void GPIO_setMaxOutputSpeed(uint8_t port, uint8_t pin, uint8_t vel){
+	//---set bits
+	if(pin > 7)		GPIO[port].CRH |= (vel << ((pin*4) + MODE_OFFSET));
+	else			GPIO[port].CRL |= (vel << ((pin*4) + MODE_OFFSET));
+}
 
 
 /** @brief poner un pin configurado con funcion alternativa en push-pull o opendrain
  *  @param	Puerto del pin que se quiere congurar
  *  @param 	Número de pin a configurar
- *  @param	Modo. USAR DEFINES OUTPUT_PUSHPULL y OUTPUT_OPENDRAIN
+ *  @param	Modo. USAR DEFINES ALTERNATE_PUSHPULL y ALTERNATE_OPENDRAIN
  */
 void GPIO_setAltMode(uint8_t port, uint8_t pin, uint8_t mode){
 	//---reset bits to be set
 	//pongo en 0 los bits de crl.cnf. Está configurado como analog
-	if(pin > 7)		GPIO[port].CRH &= ~(0x03 << ((pin*4)+2));
-	else			GPIO[port].CRL &= ~(0x03 << ((pin*4)+2));
-
-	//---choose values
-	uint8_t cnf_value;
-	switch(mode){
-		case ALTERNATE_PUSHPULL:	cnf_value = 0b10;	 	break;
-		case ALTERNATE_OPENDRAIN:	cnf_value = 0b11;	 	break;
-	}
+	if(pin > 7)		GPIO[port].CRH &= ~(0x03 << ((pin*4) + CNF_OFFSET));
+	else			GPIO[port].CRL &= ~(0x03 << ((pin*4) + CNF_OFFSET));
 
 	//---set bits
-	if(pin > 7)		GPIO[port].CRH |= (cnf_value << ((pin*4)+2));
-	else			GPIO[port].CRL |= (cnf_value << ((pin*4)+2));
+	if(pin > 7)		GPIO[port].CRH |= (mode << ((pin*4) + CNF_OFFSET));
+	else			GPIO[port].CRL |= (mode << ((pin*4) + CNF_OFFSET));
 }
 
 

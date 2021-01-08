@@ -4,12 +4,11 @@
  *  Created on: 5 ene. 2021
  *      Author: usuario
  */
+#define SW_TIMER_BEING_USED
 
 #ifndef DR_H_HAL_SW_TIMER_H_
 #define DR_H_HAL_SW_TIMER_H_
 
-
-#define TIMER_BEING_USED
 /*!-----------INCLUDES PUBLICOS-----------------------------------------------------------------------------*/
 #include <System.h>
 #include <DR_h/HAL/RHAL.h>
@@ -23,8 +22,6 @@
 /*!-----------FUNCIONES-------------------------------------------------------------------------------------*/
 
 class SW_Timer{
-
-
 public:
 	SW_Timer(uint16_t t, void (* f_event )(void));
 	bool Pause(bool state);
@@ -41,7 +38,6 @@ private:
 
 	static uint16_t SW_TmrTime[ N_TIMERS ];
 	static void (*SW_TmrFunc[ N_TIMERS ])(void);
-	static uint32_t SW_TmrFlags;
 	static uint32_t SW_TmrPlay;
 	static uint32_t SW_TmrUsed;
 

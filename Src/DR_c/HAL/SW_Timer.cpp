@@ -11,37 +11,32 @@
 
 /*!-----------DEFINES Y MACROS PRIVADOS---------------------------------------------------------------------*/
 #define PauseTmr(b)		(SW_TmrPlay &= ~(1 << b))
-#define PlayTmr(b)		(SW_TmrPlay |= (1 << b))
+#define StartTmr(b)		(SW_TmrPlay |= (1 << b))
 #define TmrPlayState(b)	((SW_TmrPlay >> b) & 0x01)
 
-#define setTmrFlag(b)	(SW_TmrFlags |= (1 << b))
-#define clrTmrFlag(b)	(SW_TmrFlags &= ~(1 << b))
-#define TmrFlagState(b)	((SW_TmrFlags >> b) & 0x01)
-
-#define setTmrUsed(b)	(SW_TmrFlags |= (1 << b))
-#define clrTmrUsed(b)	(SW_TmrFlags &= ~(1 << b))
-#define TmrUsedState(b)	((SW_TmrFlags >> b) & 0x01)
+#define setTmrUsed(b)	(SW_TmrUsed |= (1 << b))
+#define clrTmrUsed(b)	(SW_TmrUsed &= ~(1 << b))
+#define TmrUsedState(b)	((SW_TmrUsed >> b) & 0x01)
 /*!-----------TIPOS DE DATOS PRIVADOS-----------------------------------------------------------------------*/
 
 /*!-----------VARIABLES GLOBALES PRIVADAS-------------------------------------------------------------------*/
 uint16_t SW_Timer::SW_TmrTime[ N_TIMERS ] = {0};
-void (*SW_Timer::SW_TmrFunc[ N_TIMERS ])(void);
-uint32_t SW_Timer::SW_TmrFlags = 0;
+void (*SW_Timer::SW_TmrFunc[ N_TIMERS ])(void) = {nullptr};
 uint32_t SW_Timer::SW_TmrUsed = 0;
-
 uint32_t SW_Timer::SW_TmrPlay = 0;
 /*!-----------VARIABLES GLOBALES PUBLICAS-------------------------------------------------------------------*/
 
 /*!-----------FUNCIONES-------------------------------------------------------------------------------------*/
 
 SW_Timer::SW_Timer(uint16_t t , void (* f_event )(void)){
+
 	for(uint8_t i = 0; i < N_TIMERS; i++){
 		if(!TmrUsedState(i)) {
 			_event_N = i;
 			SW_TmrFunc[_event_N] = f_event;
 			SW_TmrTime[_event_N] = t;
-			PlayTmr(_event_N);
 
+			StartTmr(_event_N);
 			setTmrUsed(_event_N);
 			break;
 		}
@@ -60,7 +55,7 @@ SW_Timer::SW_Timer(uint16_t t , void (* f_event )(void)){
 */
 bool SW_Timer::Pause ( bool modo ){
 	if(SW_TmrTime[_event_N]){
-		if(modo) PlayTmr(_event_N);
+		if(modo) StartTmr(_event_N);
 		else PauseTmr(_event_N);
 
 		return true;
@@ -78,7 +73,6 @@ bool SW_Timer::Pause ( bool modo ){
 bool SW_Timer::Stop (){
 	if(SW_TmrTime[_event_N]){
 		SW_TmrTime[_event_N] = 0;
-		clrTmrFlag(_event_N);
 		PauseTmr(_event_N);
 		SW_TmrFunc[_event_N] = nullptr;
 

@@ -7,13 +7,20 @@
 #include <DR_h/HAL/RHAL.h>
 #include <DR_h/Hardware/DR_PLL.h>
 #include <DR_h/Hardware/DR_Systick.h>
-#include <DR_h/HAL/SW_Timer.h>
+
+#ifdef SW_TIMER_BEING_USED
+	#include <DR_h/HAL/SW_Timer.h>
+#endif
 
 volatile Flags_t main_flags;//variable global para flags
 
 RHAL::RHAL(){
 	init_CLK();
 	Systick_init();
+
+	PCLK_Enable(PCLK2, PCLK2_bits::GPIOA_PCLK);
+	PCLK_Enable(PCLK2, PCLK2_bits::GPIOB_PCLK);
+	PCLK_Enable(PCLK2, PCLK2_bits::GPIOC_PCLK);
 
 	main_flags.Systick_ms = 0;
 }
@@ -40,9 +47,11 @@ void RHAL::init_CLK(){
 
 void RHAL::do_every_1ms(void (* func )(void)){
 	if(one_ms_passed()){
-		#ifdef TIMER_BEING_USED
-			SW_Timer::Run();
-		#endif
+	#ifdef SW_TIMER_BEING_USED
+		SW_Timer::Run();
+	#endif
+
+
 		func();
 	}
 }
