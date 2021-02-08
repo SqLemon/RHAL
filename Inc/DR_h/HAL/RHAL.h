@@ -19,6 +19,7 @@ public:
 		return res;
 	};
 	void do_every_1ms(void (* func )(void));
+	void do_loop(void (* func )(void));
 
 private:
 	void init_CLK();

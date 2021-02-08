@@ -10,7 +10,7 @@
 
 #include <System.h>
 #include "Pin.h"
-#include "OutputPin.h"
+//#include "OutputPin.h"
 
 class InputPin : Pin {
 

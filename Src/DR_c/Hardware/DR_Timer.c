@@ -6,8 +6,8 @@
  */
 
 /*!-----------INCLUDES PRIVADOS-----------------------------------------------------------------------------*/
-#include <DR_h/Hardware/DR_Timer.h>
 #include <System.h>
+#include <DR_h/Hardware/DR_Timer.h>
 
 #ifdef __cplusplus
 extern "C" {
