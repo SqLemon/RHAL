@@ -1,0 +1,29 @@
+{
+    "name": "RHAL",
+    "version": "1.0.0",
+    "description": "The \"RHAL\" library is a c++ set of functions and classes that provides everything needed to develop a basic robot for competitions ",
+    "keywords": "InputPin, OutputPin, ADC, PWM, HardwareTimer, SoftwareTimer, Serial",
+    "repository":
+    {
+      "type": "git",
+      "url": "https://github.com/SqLemon/RHAL.git"
+    },
+    "authors":
+    [
+      {
+        "name": "Damián Melamed",
+        "email": "damimelamed@gmail.com",
+        "maintainer": true
+
+      },
+      {
+        "name": "Ianick noejovich",
+        "email": "iakanoe1056@gmail.com",
+        "maintainer": true
+      }
+    ],
+    "license": "MIT",
+    "homepage": "https://sqlemon.github.io/",
+    "frameworks": "cmsis",
+    "platforms": "ststm32"
+  }
