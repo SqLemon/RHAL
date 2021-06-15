@@ -14,10 +14,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y python3 curl
           python3 -c "$(curl -fsSL https://raw.githubusercontent.com/platformio/platformio/master/scripts/get-platformio.py)"
+      - name: Compile and package
+        run: |
           export PATH=$PATH:~/.platformio/penv/bin
           export VERSION=`jq .version library.json | sed 's/\./\,/'`
-      - name: Compile and package
-        run: platformio package pack . -o RHAL_$VERSION.tar.gz
+          platformio package pack . -o RHAL_$VERSION.tar.gz
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
