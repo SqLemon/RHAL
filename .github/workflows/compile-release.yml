@@ -18,17 +18,15 @@ jobs:
         run: |
           export PATH=$PATH:~/.platformio/penv/bin
           export VERSION=`jq .version library.json`
-          export VERSIONTAR=`echo $VERSION | sed 's/\./\,/'`
-          export FILENAME=RHAL_$VERSIONTAR.tar.gz
+          export FILENAME=RHAL.tar.gz
           platformio package pack . -o $FILENAME
           echo "version=$VERSION" >> $GITHUB_ENV
-          echo "filename=$FILENAME" >> $GITHUB_ENV
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ env.version }}
           files: |
-            ${{ env.filename }}
+            RHAL.tar.gz
             LICENSE
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
