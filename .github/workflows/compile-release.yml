@@ -4,7 +4,7 @@ on:
     branches:
       - release
 jobs:
-  build:
+  compile-release:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -17,13 +17,18 @@ jobs:
       - name: Compile and package
         run: |
           export PATH=$PATH:~/.platformio/penv/bin
-          export VERSION=`jq .version library.json | sed 's/\./\,/'`
-          platformio package pack . -o RHAL_$VERSION.tar.gz
+          export VERSION=`jq .version library.json`
+          export VERSIONTAR=`echo $VERSION | sed 's/\./\,/'`
+          export FILENAME=RHAL_$VERSIONTAR.tar.gz
+          platformio package pack . -o $FILENAME
+          echo "::set-env name=VERSION::$VERSION"
+          echo "::set-env name=FILENAME::$FILENAME"
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
+          tag_name: ${{ env.VERSION }}
           files: |
-            RHAL_$VERSION.tar.gz
+            ${{ env.FILENAME }}
             LICENSE
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
