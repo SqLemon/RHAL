@@ -1,0 +1,28 @@
+name: compile and release
+on:
+  push:
+    branches:
+      - release
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup PIO
+        run: |  
+          sudo apt-get update
+          sudo apt-get install -y python3 curl
+          python3 -c "$(curl -fsSL https://raw.githubusercontent.com/platformio/platformio/master/scripts/get-platformio.py)"
+          export PATH=$PATH:~/.platformio/penv/bin
+          export VERSION=`jq .version library.json | sed 's/\./\,/'`
+      - name: Compile and package
+        run: platformio package pack . -o RHAL_$VERSION.tar.gz
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            RHAL_$VERSION.tar.gz
+            LICENSE
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
