@@ -1,2 +1,0 @@
--run "pio lib install C:\path". the path must shoe where de src, inc and other folders are
--if header files are not being detected by intellisense, press *ctrl+shift+P* to open visualStudio options and then run "PlatformIO: rebuild intellisence index"
