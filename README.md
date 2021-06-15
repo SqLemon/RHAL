@@ -1,8 +1,4 @@
-RHAL - for blue pill
-====================
-
-RHAL - for blue pill
-====================
+# RHAL - for blue pill
 
 RHAL is a collection of  C++ functions that lets you control the stm32f103c8 chip.
 
