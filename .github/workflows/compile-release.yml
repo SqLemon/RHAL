@@ -21,14 +21,14 @@ jobs:
           export VERSIONTAR=`echo $VERSION | sed 's/\./\,/'`
           export FILENAME=RHAL_$VERSIONTAR.tar.gz
           platformio package pack . -o $FILENAME
-          echo "::set-env name=VERSION::$VERSION"
-          echo "::set-env name=FILENAME::$FILENAME"
+          echo "version=$VERSION" >> $GITHUB_ENV
+          echo "filename=$FILENAME" >> $GITHUB_ENV
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ env.VERSION }}
+          tag_name: ${{ env.version }}
           files: |
-            ${{ env.FILENAME }}
+            ${{ env.filename }}
             LICENSE
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
