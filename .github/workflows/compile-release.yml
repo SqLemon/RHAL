@@ -18,7 +18,7 @@ jobs:
       - name: Compile and package
         run: |
           export PATH=$PATH:~/.platformio/penv/bin
-          export VERSION=`jq .version library.json | sed 's/\"//'`
+          export VERSION=`jq -r .version library.json`
           export FILENAME=RHAL.tar.gz
           platformio package pack . -o $FILENAME
           echo "version=$VERSION" >> $GITHUB_ENV
