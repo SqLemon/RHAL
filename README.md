@@ -16,8 +16,8 @@ Supported functionalities are:
   - Encoder interface
 - Software timers
 - ADC
-- External interrupts
-- Hardware encoder implementation
+- External interrupts (pending)
+- Hardware encoder implementation (pending)
 
 ## Getting started
 
@@ -55,6 +55,8 @@ void main(){
     }
 }
 ```
+
+**there are examples for the different modules in the [examples](https://https://github.com/SqLemon/RHAL/tree/main/examples) folder.**
 
 ## Authors
 
