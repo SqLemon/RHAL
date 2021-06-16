@@ -1,4 +1,4 @@
-name: compile and release
+name: release
 on:
   push:
     branches:
@@ -30,3 +30,7 @@ jobs:
             LICENSE
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish
+        run: |
+          export PATH=$PATH:~/.platformio/penv/bin
+          platformio package publish
