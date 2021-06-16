@@ -34,3 +34,5 @@ jobs:
         run: |
           export PATH=$PATH:~/.platformio/penv/bin
           platformio package publish
+        env:
+          PLATFORMIO_AUTH_TOKEN: ${{ secrets.PLATFORMIO_AUTH_TOKEN }}
