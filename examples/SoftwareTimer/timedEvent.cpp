@@ -27,7 +27,7 @@ int main() {
         hal.tick(); //system update. Must be at the top of the code     
 
         //if the button is pressed, the led will be turned on for 3 seconds. Then, it will turn off
-        if(btn() && ledTimer.ended()){ 
+        if(!btn() && ledTimer.ended()){ 
             ledTimer.init();    //make the timer start counting
             led = true;         //turn the led ON
         }
