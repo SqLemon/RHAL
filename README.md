@@ -2,7 +2,7 @@
 
 RHAL is a collection of  C++ functions that lets you control the stm32f103c8 chip.
 
-## Description
+## Description 📋
 
 RHAL's main objective is to serve as a base platform for robotics development that needs too be simple but efficient.
 Supported functionalities are:
@@ -19,7 +19,7 @@ Supported functionalities are:
 - External interrupts (pending)
 - Hardware encoder implementation (pending)
 
-## Getting started
+## Getting started 🚀️
 
 ### Dependencies
 
@@ -28,7 +28,7 @@ RHAL is based on the CMSIS framework. We recomend the useage of "Platform.io", b
 ### Installation
 
 - **PlatformIO**
-  - you can directly download the library can be downloaded from platformio's library manager (not avbailable yet).
+  - you can directly download the library can be downloaded from platformio's library manager.
 - **Direct download**
   - In case you decide to install it manualy, you can download and extract this project in any folder and the install it runing `pio lib install C:\your-path` in a PIO terminal
 
@@ -36,7 +36,7 @@ RHAL is based on the CMSIS framework. We recomend the useage of "Platform.io", b
 
 If the header files are not being recognized by intellisence, you coud press *ctrl+shift+P*  to open visualStudio options and then run "PlatformIO: rebuild intellisence index"
 
-## Usage
+## Usage ⚙️
 
 Once you have RHAL installed in your project, proceed to create a *main.cpp* file like the follownig.
 
@@ -58,12 +58,12 @@ void main(){
 
 **there are examples for the different modules in the [examples](https://https://github.com/SqLemon/RHAL/tree/main/examples) folder.**
 
-## Authors
+## Authors ✒️
 
 * Damián Melamed [@damimela]
 * Ianick Noejovich [@iakanoe]
 
-## License
+## License 📄
 
 Copyright 2021 SquareLemon
 
