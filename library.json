@@ -1,6 +1,6 @@
 {
   "name": "RHAL",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "The \"RHAL\" library is a c++ set of functions and classes that provides everything needed to develop a basic robot for competitions ",
   "keywords": "InputPin, OutputPin, ADC, PWM, HardwareTimer, SoftwareTimer, Serial",
   "repository": {
