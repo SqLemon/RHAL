@@ -23,18 +23,14 @@ Supported functionalities are:
 
 ### Dependencies
 
-RHAL is based on the CMSIS framework. We recomend the useage of "Platform.io", but you can use any IDE that supports this framwork
+RHAL is based on the CMSIS framework. We recomend the usage of "Platform.io", but you can use any IDE that supports this framework
 
 ### Installation
 
 - **PlatformIO**
-  - you can directly download the library can be downloaded from platformio's library manager.
+  - you can directly download the library from platformio's library manager.
 - **Direct download**
   - In case you decide to install it manualy, you can download and extract this project in any folder and the install it runing `pio lib install C:\your-path` in a PIO terminal
-
-### Posible issues
-
-If the header files are not being recognized by intellisence, you coud press *ctrl+shift+P*  to open visualStudio options and then run "PlatformIO: rebuild intellisence index"
 
 ## Usage ⚙️
 
@@ -56,7 +52,7 @@ void main(){
 }
 ```
 
-**there are examples for the different modules in the [examples](https://https://github.com/SqLemon/RHAL/tree/main/examples) folder.**
+**there are examples for the different modules in the [examples](https://github.com/SqLemon/RHAL/tree/main/examples) folder.**
 
 ## Authors ✒️
 
